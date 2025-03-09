@@ -1,66 +1,49 @@
-## Foundry
+# Foundry DeFi Stablecoin
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Overview
+This project is a **Decentralized Stablecoin** system built using **Foundry**. It consists of smart contracts that create and manage a stablecoin, ensuring stability through an underlying mechanism.
 
-Foundry consists of:
+## Features
+- **Decentralized Stablecoin**: A token pegged to a stable asset.
+- **DSCEngine**: Manages minting, collateral, and liquidation.
+- **Foundry-based Testing**: Uses `forge test` for robust smart contract testing.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+## Installation
+Ensure you have Foundry installed. If not, install it with:
+```sh
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+```
+Clone the repository and install dependencies:
+```sh
+git clone <repo_url>
+cd foundry-defi-stablecoin
+forge install
 ```
 
-### Test
-
-```shell
-$ forge test
+## Compilation
+Compile the smart contracts using:
+```sh
+forge build
 ```
 
-### Format
-
-```shell
-$ forge fmt
+## Testing
+Run the test suite with:
+```sh
+forge test
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
+## Deployment
+To deploy on Sepolia:
+```sh
+forge script script/Deploy.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast
 ```
+Replace `$SEPOLIA_RPC_URL` and `$PRIVATE_KEY` with your actual values.
 
-### Anvil
+## Smart Contracts
+- **DecentralizedStableCoin.sol**: Implements the stablecoin logic.
+- **DSCEngine.sol**: Handles stability mechanisms and collateral management.
 
-```shell
-$ anvil
-```
+## License
+This project is licensed under the MIT License.
 
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
