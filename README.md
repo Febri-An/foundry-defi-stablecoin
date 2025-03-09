@@ -36,9 +36,11 @@ forge test
 ## Deployment
 To deploy on Sepolia:
 ```sh
-forge script script/Deploy.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast
+forge script script/DeployDSC.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast
 ```
 Replace `$SEPOLIA_RPC_URL` and `$PRIVATE_KEY` with your actual values.
+
+note: see the Makefile for more options and more details.
 
 ## Smart Contracts
 - **DecentralizedStableCoin.sol**: Implements the stablecoin logic.
