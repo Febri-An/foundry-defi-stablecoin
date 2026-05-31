@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DSC Frontend</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="toast-container" aria-live="polite"></div>
+
+    <main class="container">
+      <h1>Decentralized Stablecoin UI</h1>
+      <p class="muted">Interact with your deployed DSCEngine on Sepolia.</p>
+
+      <section class="card">
+        <h2>Quick Start</h2>
+        <ol class="steps">
+          <li>Choose a <strong>network preset</strong> and paste your <strong>DSCEngine</strong> address from <code>forge script</code>.</li>
+          <li><strong>Connect Wallet</strong> → <strong>Switch Network</strong> if needed → <strong>Load Contract</strong>.</li>
+          <li>Ensure you hold WETH/WBTC at the preset addresses, then approve and deposit.</li>
+          <li>Use <strong>Refresh Data</strong> after each transaction to update your position.</li>
+        </ol>
+      </section>
+
+      <section class="card">
+        <h2>Configuration</h2>
+        <div class="grid two">
+          <label>
+            Network preset
+            <select id="networkPreset">
+              <option value="sepolia">Sepolia</option>
+            </select>
+          </label>
+          <label>
+            Expected chain ID
+            <input id="expectedChainId" type="text" value="11155111" />
+          </label>
+          <label>
+            DSCEngine address
+            <input id="engineAddress" placeholder="0x… (from forge script output)" />
+          </label>
+          <label class="checkbox-row">
+            <input id="autoApprove" type="checkbox" checked />
+            Auto-approve tokens before deposit / burn (easier testing)
+          </label>
+        </div>
+        <p class="hint">Settings are saved in your browser automatically when you click Save config.</p>
+        <div class="row">
+          <button type="button" id="saveConfigBtn" class="secondary">Save config</button>
+          <button type="button" id="resetConfigBtn" class="secondary">Reset config</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Connection</h2>
+        <div class="row">
+          <button type="button" id="connectBtn">Connect Wallet</button>
+          <button type="button" id="switchNetworkBtn" class="secondary">Switch Network</button>
+          <button type="button" id="loadBtn">Load Contract</button>
+          <button type="button" id="refreshBtn" class="secondary">Refresh Data</button>
+        </div>
+        <p id="walletInfo" class="muted">Wallet: not connected</p>
+        <p id="contractInfo" class="muted">Contract: not loaded</p>
+        <p id="status" class="status">Status: idle</p>
+      </section>
+
+      <section class="card">
+        <h2>User Position</h2>
+        <div class="grid two">
+          <div>
+            <div class="label">Minted DSC</div>
+            <div id="mintedDsc" class="value">—</div>
+          </div>
+          <div>
+            <div class="label">Collateral Value (USD)</div>
+            <div id="collateralUsd" class="value">—</div>
+          </div>
+          <div>
+            <div class="label">Health Factor</div>
+            <div id="healthFactor" class="value">—</div>
+            <p class="hint">Must stay ≥ 1. Below 1 risks liquidation.</p>
+          </div>
+          <div>
+            <div class="label">DSC Wallet Balance</div>
+            <div id="dscBalance" class="value">—</div>
+          </div>
+        </div>
+        <h3>Collateral balances</h3>
+        <div id="collateralList">
+          <p class="muted">Load contract to see collateral.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>DSCEngine Actions</h2>
+        <div class="grid two">
+          <label>
+            Collateral token
+            <select id="collateralToken"></select>
+          </label>
+          <label>
+            Custom token (optional override)
+            <input id="customTokenAddress" placeholder="0x…" />
+          </label>
+          <label>
+            Collateral amount
+            <input id="collateralAmount" placeholder="e.g. 1" />
+          </label>
+          <label>
+            DSC amount
+            <input id="dscAmount" placeholder="e.g. 10" />
+          </label>
+        </div>
+        <p id="tokenBalances" class="muted">Token balance / allowance: —</p>
+        <div class="row">
+          <button type="button" id="mintTestTokensBtn" class="secondary" hidden>
+            Mint test tokens
+          </button>
+        </div>
+        <p class="hint">Deposit flow: approve collateral (or auto-approve) → deposit → mint. Burn/redeem need DSC approval to the engine.</p>
+        <div class="row">
+          <button type="button" id="approveCollateralBtn">Approve Collateral</button>
+          <button type="button" id="depositBtn">Deposit Collateral</button>
+          <button type="button" id="mintBtn">Mint DSC</button>
+          <button type="button" id="depositAndMintBtn">Deposit + Mint</button>
+        </div>
+        <div class="row">
+          <button type="button" id="approveDscBtn">Approve DSC</button>
+          <button type="button" id="burnBtn">Burn DSC</button>
+          <button type="button" id="redeemBtn">Redeem Collateral</button>
+          <button type="button" id="redeemForDscBtn">Redeem for DSC</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

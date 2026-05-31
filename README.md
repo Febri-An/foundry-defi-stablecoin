@@ -38,7 +38,33 @@ To deploy on Sepolia:
 ```sh
 forge script script/DeployDSC.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast
 ```
-Replace `$SEPOLIA_RPC_URL` and `$PRIVATE_KEY` with your actual values.
+Replace `$SEPOLIA_RPC_URL` and `$PRIVATE_KEY` with your actual values. Copy the **DSCEngine** address from the output for the frontend.
+
+## Frontend
+
+Static UI lives in [`docs/`](docs/) (built from [`frontend/`](frontend/)).
+
+- **GitHub Pages**: `https://<your-user>.github.io/foundry-defi-stablecoin/` — enable **Settings → Pages → GitHub Actions**, or deploy from branch `main` / folder `/docs` after `npm run build`
+- **Local dev**: `cd frontend && npm install && npm run dev`
+- **Rebuild**: `cd frontend && npm run build`
+
+### Testing flow (Anvil)
+
+1. `anvil`
+2. `forge script script/DeployDSC.s.sol --rpc-url http://127.0.0.1:8545 --broadcast`
+3. MetaMask: network `31337`, RPC `http://127.0.0.1:8545`, import Anvil account #0
+4. Open the UI → preset **Local Anvil** → paste DSCEngine + WETH/WBTC from deploy logs
+5. Connect → Load → Mint test tokens → Deposit + Mint (e.g. collateral `1`, DSC `10`) → Refresh
+6. Burn / redeem with small amounts; keep health factor ≥ 1
+
+### Testing flow (Sepolia)
+
+1. Deploy with the command above on Sepolia
+2. Fund wallet with Sepolia ETH and collateral tokens at `HelperConfig` addresses
+3. Build or use GitHub Pages → preset **Sepolia** → paste DSCEngine address
+4. Connect → Switch network → Load → approve/deposit/mint → verify on Etherscan
+
+See [`frontend/README.md`](frontend/README.md) for UI configuration details.
 
 note: see the Makefile for more options and more details.
 

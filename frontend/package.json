@@ -1,0 +1,18 @@
+{
+  "name": "dsc-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "verify-ui": "node scripts/verify-ui.mjs"
+  },
+  "dependencies": {
+    "ethers": "^6.13.2"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  }
+}
