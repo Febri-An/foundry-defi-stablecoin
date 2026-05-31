@@ -24,7 +24,7 @@ contract Invariants is StdInvariant, Test {
     function setUp() public {
         deployer = new DeployDSC();
         (dsc, engine, config) = deployer.run();
-        (,, weth, wbtc,) = config.activeNetworkConfig();
+        (,, weth, wbtc) = config.activeNetworkConfig();
         handler = new Handler(dsc, engine);
         targetContract(address(handler));
         // don't call redeemCollateral, unless there is collateral to redeem!
