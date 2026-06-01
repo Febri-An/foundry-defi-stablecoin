@@ -8,6 +8,9 @@ out/
 /broadcast/**/dry-run/
 /broadcast
 
+# Headers submodule
+headers/
+
 # Frontend
 frontend/node_modules/
 
