@@ -7,12 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "verify-ui": "node scripts/verify-ui.mjs"
+    "verify-ui": "node scripts/verify-ui.mjs",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d ../docs"
   },
   "dependencies": {
     "ethers": "^6.13.2"
   },
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "vite": "^5.4.11"
   }
 }
